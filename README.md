@@ -1,1 +1,1 @@
-= # Asteroids for Boot.dev
+# Asteroids for Boot.dev
