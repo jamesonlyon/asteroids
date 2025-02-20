@@ -1,37 +1,32 @@
 import pygame
 from constants import *
+from player import Player
 
 # Main Function
 def main():
     pygame.init()
-    
-    # Print boot message
-    print(f"""Starting Asteroids!\nScreen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}""")
 
-    # Set the GUI window
-    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    print(f"""Starting Asteroids!\nScreen width: {SCREEN_WIDTH}\nScreen height: {SCREEN_HEIGHT}""") # Print boot message
 
-    # create a new pygame.time.Clock object
-    fps = pygame.time.Clock()
-    
-    # create delta time (dt) variable set to 0
-    dt = 0
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) # create the GUI screen
+    fps = pygame.time.Clock() # create a new pygame.time.Clock object
+    player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2) # create a player ojbect
+    dt = 0 # create delta time (dt) variable set to 0
 
-    # Open the game loop
-    while True:
-
+    while True: # Open the game loop
         for event in pygame.event.get(): # On window close, quit the game
             if event.type == pygame.QUIT:
+                print("Quitting Asteroids...")
                 return
         
         screen.fill("black") # Fill the screen with black
+        player.draw(screen) # Draw the player sprite
+        player.update(dt)
         pygame.display.flip() # Refresh the screen
-
-        # Pause the game for 1/60th of a second and
-        # update the delta time with time passed since last frame
-        dt = fps.tick(60) / 1000
+        
+        dt = fps.tick(60) / 1000 # Limit framerate to 60 FPS
 
 
-# (For now) Don't touch below this line
+# Pygame Main Function Call
 if __name__ == "__main__":
     main()
